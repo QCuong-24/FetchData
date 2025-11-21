@@ -129,8 +129,8 @@ public class ExtractData {
             driver.findElement(By.cssSelector("input[type='submit']")).click();
 
             // Select all patient
-            driver.findElement(new By.ById("ctl04_txtSearch")).sendKeys("%");
-            driver.findElement(new By.ById("ctl04_cmdSearch")).click();
+            //driver.findElement(new By.ById("ctl04_txtSearch")).sendKeys("%");
+            //driver.findElement(new By.ById("ctl04_cmdSearch")).click();
 
             // Print the title of the page
             System.out.println("Page title is: " + driver.getTitle());
@@ -146,11 +146,13 @@ public class ExtractData {
             Elements links = doc.select("td.item_l.min_w200 div.pad_b3 a.b12");
             for (Element link: links) {
                 System.out.println("Links " + link.attr("href"));
+
                 driver.get("https://hanoismile.bambu.vn"+link.attr("href"));
                 Document docu = Jsoup.parse(driver.getPageSource());
 
                 cnt++;
                 addJSon(docu);
+
                 /*Elements nonEmptyInputs = docu.select("#ctl04_pnlEdit input[value]:not([value=''])");
                 for (Element input : nonEmptyInputs) {
                     System.out.println("Non-empty input: " + input.attr("name") + " -> " + input.attr("value"));
